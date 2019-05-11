@@ -48,7 +48,7 @@ pygmentsuseclasses         = true
  
 
 [params]
-  faviconfile              = "img/zheng.png"               # from static/
+  faviconfile              = "img/qu.png"               # from static/
   avatar                   = "img/profile.jpg"             # path to image in static dir e.g img/avatar.png 
   author                   = "Qian Qu"
   description              = ["Be myself.", "Love the wonderful world.", "Do the right things and be a better man."]           # appears in the site header when set to a non-empty string
@@ -61,8 +61,12 @@ pygmentsuseclasses         = true
   dateformfull             = "2006-01-02  Monday  15:04:05"
   noshowreadtime           = false                         # if true, don't show "<x> minutes read" in posts
 
+  ## slides
+  #slidesDirPath            = "themes/AllinOne/static/img/header-slides"    # using theme img
+  #slidesDirPathURL         = "img/header-slides"    # path to image in static dir (for static pages)
+
   # slides
-  slidesDirPath            = "themes/AllinOne/static/img/header-slides"    # path to image in local dir (path for hugo)
+  slidesDirPath            = "static/img/header-slides"    # path to image in local dir (path for hugo)
   slidesDirPathURL         = "img/header-slides"    # path to image in static dir (for static pages)
 
   # highlighting 
