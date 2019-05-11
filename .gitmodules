@@ -1,3 +1,7 @@
 [submodule "themes/AllinOne"]
 	path = themes/AllinOne
 	url = https://github.com/orianna-zzo/AllinOne.git
+[submodule "public"]
+	path = public
+	url = git@github.com:quq99/quq99.github.io.git
+	branch = master
