@@ -49,9 +49,9 @@ pygmentsuseclasses         = true
 
 [params]
   faviconfile              = "img/qu2.png"               # from static/
-  avatar                   = "img/profile.jpg"             # path to image in static dir e.g img/avatar.png
+  avatar                   = "img/profile2.jpg"             # path to image in static dir e.g img/avatar.png
   author                   = "Qian Qu"
-  description              = ["Be myself.", "Love the wonderful world.", "Do the right things and be a better man."]           # appears in the site header when set to a non-empty string
+  description              = ["Stay young", "Stay simple", "tibi seris, tibi metis"]           # appears in the site header when set to a non-empty string
   welcome_head             = "Hello, World!"
   welcome_word             = "~ No Day But Today ~"
 
