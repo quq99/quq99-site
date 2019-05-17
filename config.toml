@@ -84,9 +84,11 @@ pygmentsuseclasses         = true
   #twitter                  = "//twitter.com/you"
   #px500                    = "//px500"
   #instagram                = "//instagram.com/you"
-  #include_rss              = true                          # include RSS <link> tag in <head> and show RSS icon
+  include_rss              = false                          # include RSS <link> tag in <head> and show RSS icon
 
   # analytics
   #googleAnalytics          = "your-google-analytic-id"
 
 
+  # counter
+  busuanzi                 = true
