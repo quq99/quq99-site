@@ -18,6 +18,8 @@ pygmentsuseclasses         = true
 
 [permalinks]
   blog                     = "blog/:year-:month/:slug/"
+  resume                   = "resume/:slug/"
+
 
 
 [taxonomies]
@@ -34,10 +36,10 @@ pygmentsuseclasses         = true
     url                    = "blog/"
 
   [[menu.main]]
-    name                   = "Moment"
+    name                   = "Resume"
     weight                 = -110
-    identifier             = "moment"
-    url                    = "moment/"
+    identifier             = "resume"
+    url                    = "resume/"
 
   [[menu.main]]
     name                   = "About"
