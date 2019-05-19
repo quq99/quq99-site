@@ -35,4 +35,4 @@ Bachelor of Electronic Information Science and Technology 									July 2015
 
 # Skills
 
-C++, Python, Git, Tensorflow, Pytorch
+C++, Python, Git, Tensorflow, Pytorch, shell script
