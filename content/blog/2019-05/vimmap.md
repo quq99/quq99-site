@@ -95,15 +95,18 @@ and `:source %` in vim to make it works. The next time when you press `,x` in no
 
 Now come back to the problem I have, the touch bar. I feel really uncomfortable to use "\<esc>" to switch between `normal` mode and `insert` mode. So I add the following lines to my `.vimrc` file.
 
-```c
+```
 let mapleader=','
-" save file in both insert mode and normal mode
+
+" save file
 inoremap <leader>w <Esc>:w<cr>
 noremap <leader>w :w<cr>
-" map <Esc> to jj, 
-" leave insert mode to normal mode.
+
+" map <Esc> to jj
 inoremap jj <Esc>
 ```
+
+
 
 
 
