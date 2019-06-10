@@ -40,7 +40,7 @@ And, there are also some similar command. We can use `nmap`, `vmap`, `imap` to t
 
 
 
-# Side Effects
+# Side Effects of map
 
 There are two side effects of using `map` command. 
 
@@ -55,7 +55,7 @@ For example,
 nmap dd o<esc>jdd
 ```
 
-you may think this command would open a new line, and esc to normal mode and move down one line and delete this line. However, because **o<esc>jdd** include "dd", so it will do it recursively and can never end.
+you may think this command would open a new line, and esc to normal mode and move down one line and delete this line. However, because **o\<esc>jdd** include "dd", so it will do it recursively and can never end.
 
 
 
@@ -91,9 +91,9 @@ and `:source %` in vim to make it works. The next time when you press `,x` in no
 
 
 
-# Get rid of <esc>
+# Get rid of "\<esc>"
 
-Now come back to the problem I have, the touch bar. I feel really uncomfortable to use <esc> to switch between `normal` mode and `insert` mode. So I add the following lines to my `.vimrc` file.
+Now come back to the problem I have, the touch bar. I feel really uncomfortable to use "\<esc>" to switch between `normal` mode and `insert` mode. So I add the following lines to my `.vimrc` file.
 
 ```c
 let mapleader=','
@@ -109,4 +109,4 @@ inoremap jj <Esc>
 
 The line starts with `"` means comments.
 
-I first use `,` as my **leader**. Then I map the **save** command to `,w` so next time whenever in `insert` mode or `normal` mode and when I press `,w` it would save the file and back to `normal` mode. Because I can use `ZZ` to **save and quit**, I do not need to map them. At last, I map <esc> to `jj`. Because there is no continues two *j* characters in english words and *j* is exactly where my index finger is placed on the keyboard. There we are^_^
+I first use `,` as my **leader**. Then I map the **save** command to `,w` so next time whenever in `insert` mode or `normal` mode and when I press `,w` it would save the file and back to `normal` mode. Because I can use `ZZ` to **save and quit**, I do not need to map them. At last, I map "\<esc>" to `jj`. Because there is no continues two *j* characters in english words and *j* is exactly where my index finger is placed on the keyboard. There we are^_^
