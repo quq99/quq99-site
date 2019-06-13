@@ -1,6 +1,6 @@
 baseURL                   = "https://quq99.github.io"
 builddrafts                = false
-languageCode               = "zn-Hans"
+languageCode               = "en-us"
 canonifyurls               = true
 contentdir                 = "content"
 layoutdir                  = "layouts"

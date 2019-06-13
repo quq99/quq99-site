@@ -5,9 +5,9 @@ lastmod: "2019-05-27+08:00"
 draft: false
 title: "Mapping keys in vim"
 tags: ["vim", "blog"]
-series: ["My vim journey"]
+series: ["my_vim_journey"]
 categories: ["Tools"]
-img: "images/blog/2019-05/cover.jpg"
+img: "images/blog/series/my_vim_journey/2019-05/cover.jpg"
 toc: true
 summary: "Things started when Apple started using touch bar on MacBook. Admittedly, touch bar is good, but as a vimer, I found it really inconvenient to switch between normal mode and insert mode. One day, I could not bear it, so I decided to make some changes."
 ---
