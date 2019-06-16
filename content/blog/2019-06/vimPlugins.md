@@ -79,6 +79,20 @@ Here are some information about these plugin managers.
 
 
 
+And here is an [article](<https://junegunn.kr/2014/07/vim-plugins-and-startup-time>) about vim plugins and startup time. The author conclude that 
+
+> By not loading plugins that are not immediately needed, [NeoBundle](https://github.com/Shougo/neobundle.vim) and [vim-plug](https://github.com/junegunn/vim-plug) both managed to reduce the startup times by around 107ms. [vim-plug](https://github.com/junegunn/vim-plug) now takes only 135ms to start.
+
+
+
+![plugins startup time](/images/blog/series/my_vim_journey/2019-06/vim-startup-time.png)
+
+
+
+
+
+
+
 # Use `vim-plug` to manage plugins
 
 The rest part are summaries for README on [vim-plug github site](<https://github.com/junegunn/vim-plug>).
