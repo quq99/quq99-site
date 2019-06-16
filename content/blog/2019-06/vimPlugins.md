@@ -3,7 +3,7 @@ date: "2019-06-16T20:14:59+08:00"
 publishdate: "2019-06-16+08:00"
 lastmod: "2019-06-16+08:00"
 draft: false
-title: "Mapping keys in vim"
+title: "Vim plugin manager"
 tags: ["vim", "blog", "plugins"]
 series: ["my_vim_journey"]
 categories: ["Tools"]
