@@ -2,3 +2,8 @@
 name = "my_vim_journey"
 img = "images/blog/series/my_vim_journey/vim.jpg"
 summary = "This is the series I learn vim"
+
+[[series]]
+name = "my_c++_journey"
+img = "images/blog/series/my_c++_journey/c++.jpg"
+summary = "This is the series I learn C++"
