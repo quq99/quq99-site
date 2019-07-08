@@ -31,6 +31,12 @@ Bachelor of Electronic Information Science and Technology 									<span style="
 
 # Experiences
 
+hair-dye
+
+chatbot
+
+
+
 # Projects
 
 # Skills
