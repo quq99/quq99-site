@@ -53,7 +53,7 @@ Project 2: ***Template Learning***
 
 ***Hair Dye***<span style="float:right;">*March. 2019 - May. 2019*</span>
 
-* Implement 
+* Implement the HairNet
 
 ***SouthPark Chatbot***<span style="float:right;">*Oct. 2018 - Dec. 2018*</span>
 
