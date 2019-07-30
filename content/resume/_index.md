@@ -53,7 +53,8 @@ Project 2: ***Template Learning***
 
 ***Hair Dye***<span style="float:right;">*March. 2019 - May. 2019*</span>
 
-* Implement the HairNet
+* Responsible for network implementation
+* Achieve F1 Score of 0.9 and IoU score of 0.817 on Figaro 1K dataset
 
 ***SouthPark Chatbot***<span style="float:right;">*Oct. 2018 - Dec. 2018*</span>
 
