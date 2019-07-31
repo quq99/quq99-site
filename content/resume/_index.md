@@ -53,12 +53,14 @@ Project 2: ***Template Learning***
 
 ***Hair Dye***<span style="float:right;">*March. 2019 - May. 2019*</span>
 
-* Responsible for network implementation
+* Responsible for network implementation and part of data loader 
 * Achieve F1 Score of 0.9 and IoU score of 0.817 on Figaro 1K dataset
+
+
 
 ***SouthPark Chatbot***<span style="float:right;">*Oct. 2018 - Dec. 2018*</span>
 
-- Used the persona-based Seq2Seq model. Designed and implemented the evaluation part 
+- Used the persona-based Seq2Seq model. Designed and implemented the evaluation part
 - Achieved BLEU score of 15 on average, 75 the best 
 - The Chatbot can produce meaningful answers with personality, generate diverse responses to the same question and preserve a consistent personality during a conversation. 
 - Git link: https://github.com/quq99/SouthPark-Chatbot 
