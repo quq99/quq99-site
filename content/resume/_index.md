@@ -53,7 +53,7 @@ Project 2: ***Template Learning***
 
 ***Hair Dye***<span style="float:right;">*March. 2019 - May. 2019*</span>
 
-* Responsible for network implementation and part of data loader 
+* Responsible for the network implementation and part of data loader 
 * Achieve F1 Score of 0.9 and IoU score of 0.817 on Figaro 1K dataset
 * Git link: https://github.com/aobo-y/hair-dye
 
