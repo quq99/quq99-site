@@ -55,6 +55,7 @@ Project 2: ***Template Learning***
 
 * Responsible for the network implementation and part of data loader 
 * Achieve F1 Score of 0.9 and IoU score of 0.817 on Figaro 1K dataset
+* Deploy the network to android application
 * Git link: https://github.com/aobo-y/hair-dye
 
 
