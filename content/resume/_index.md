@@ -11,7 +11,7 @@ draft = false
 
 Master of Computer Science  <span style="float:right;">*December 2019*</span>
 
-**Related Courses**: Data Structure and Algorithms, Compiler, Software Engineering, Machine Learning, Natural Language Processing, Deep Learning for Visual Recognition, Statistical Learning and Graphical Models, Cloud Computing...
+**Related Courses**: Data Structure and Algorithms, Compiler, Software Engineering, Machine Learning, Natural Language Processing, Deep Learning for Visual Recognition, Statistical Learning and Graphical Models, Cloud Computing, Internet of Things...
 
 *current GPA*: 3.9 / 4.0
 
