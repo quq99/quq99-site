@@ -95,4 +95,4 @@ Project 2: ***Template Learning***
 
 # Skills
 
-C++, Python, Git, Tensorflow, Pytorch, Scikit-learn, shell script
+C++, Java, Python, Git, Tensorflow, Pytorch, Scikit-learn, shell script
