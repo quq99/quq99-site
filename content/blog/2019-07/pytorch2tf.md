@@ -1,123 +1,37 @@
 ---
-date: "2019-07-16T20:14:59+08:00"
-publishdate: "2019-07-16+08:00"
-lastmod: "2019-07-16+08:00"
+date: "2019-08-16T20:14:59+08:00"
+publishdate: "2019-08-16+08:00"
+lastmod: "2019-08-16+08:00"
 draft: false
 title: "ONNX : convert trained pytorch model to tensorflow model"
-tags: ["vim", "blog", "plugins"]
-series: ["my_vim_journey"]
+tags: ["machine_learning", "blog", "pytorch", "tensorflow"]
+series: ["my_machine_learning_journey"]
 categories: ["Tools"]
-img: "images/blog/series/my_vim_journey/2019-07/cover.png"
+img: "images/blog/series/my_machine_learning_journey/2019-08/cover1.jpg"
 toc: true
-summary: "These two Plugins can make your code more conspicuous in vim."
+summary: "This post shows how to convert model between two Neural Network Framework by using a fantastic tool ONNX"
 ---
 
 
 
-In this post, I would like to share two Plugins that can make your code more conspicuous in vim.
+In this post, I would like to share how to convert a trained Pytorch model to a Tensorflow model.
 
 
 
-# vim-interestingwords
+# ONNX
 
-The first Plugin is `vim-interestingwords`. 
+What is ONNX?
 
-This plugin can highlight the occurrences of the word under the cursor. The beauty of this plugin is it can highlight different words simultaneously with different color. And this feature is really helpful when you navigate the code.
+[ONNX(Open Neural Network Exchange)](<https://github.com/onnx/onnx>) is an open ecosystem that empowers AI developers to choose the right tools as their project evolves. Briefly speaking, it enables interoperability between different frameworks and streamlining the path from research to production helps increase the speed of innovation in the AI community. To achieves this, it defines an extensible computation graph model, as well as built in operators and standard data types.
 
-The plugin looks like this:
-
-![vim_interestingwords](/images/blog/series/my_vim_journey/2019-07/vim_interestingwords.png)
-
-## Installation 
-
-The installation is simple, I use the `vim-plug` plugin manager to install it.
-
-First add the following line to `.vimrc` file 
-
-```sh
-Plug 'lfv89/vim-interestingwords'
-```
-
-Then `source .vimrc` in terminal to make rc file work and finally run `:PlugInstall` in vim.
+![onnx](/images/blog/series/my_machine_learning_journey/2019-08/onnx.png)
 
 
 
-## Usage
+We can think the Deep Learning as calculation over data flow graphs. The graphs are divided into two types: `Dynamic` and `Static` graphs. Different deep learning framework uses different kind of graphs. For instance, frameworks like Tensorflow, Caffe2, CNTK, Theano prefer to use static graph while others such as Pytorch, Chainer use dynamic graphs. 
 
-* Highlight words
+Both of them have Pros and Cons. As for static graph, once the graph is defined it can be used multiple times as fast as possible cause we are not going to create anything new. Also, the static computation graph can be used to schedule computation across a pool of computational devices so computational cost could be shared. So, once defined we can use the optimization compiler to optimize the graph so that large graph can be run efficiently on either CPUs or GPUs. However, it is not flexible. And, because many logic errors will wait to be uncovered until execution, static graph has difficulty in debugging. As for dynamic graph, it is more flaxible, you can define, change and execute the network as you go. There is no such special `sessions` like we do in static graphs. It is more pythonic and easy to debug. However it is not that fast compared to static graph. So, it will be really great if we could develop the model using dynamic graph and deploy it using static graph. And, here he comes -- ONNX. 
 
-Use `<leader>k`  to highlight all the occurrence of the word under the current cursor, and press it again to cancel the highlighting.
+In the rest of this blog, I will use an example to illustrate how to convert a pytorch model to a tensorflow model.
 
-We can highlight multiple different words at the same time with different color.
-
-* Navigating through words
-
-Use `N` and `n` to navigate through the occurrences of this word. This is just like what we do through the results of a search.
-
-* Clear all highlight
-
-Use `<leader>K` to cancel all highlight words.
-
-
-
-## Configuration
-
-I think the default config is OK enough for me. However, if we want to personalize our own configuration. It is also welcome. We can add the following config to our `.vimrc` file
-
-* mapping
-
-```sh
-nnoremap <silent> short_cut_for_highlight_words :call InterestingWords('n')<cr>
-nnoremap <silent> short_cut_for_clear_all_highlight :call UncolorAllWords()<cr>
-
-nnoremap <silent> short_cut_for_navigate_previous_word :call WordNavigation('forward')<cr>
-nnoremap <silent> short_cut_for_navigate_next_word :call WordNavigation('backward')<cr>
-```
-
-
-
-* color
-
-```sh
-let g:interestingWordsGUIColors = ['#8CCBEA', '#A4E57E', '#FFDB72', '#FF7272', '#FFB3FF', '#9999FF']
-```
-
-If you want to randomize the colors
-
-```sh
-let g:interestingWordsRandomiseColors = 1
-```
-
-
-
-
-
-# vim-cursorword
-
-The second plugin is `vim-cursorword`.
-
-This plugin can underlines the word under the cursor and underline the occurrences of this word at the same time.
-
-The plugin looks like this:
-
-![vim_cursorword](/images/blog/series/my_vim_journey/2019-07/vim_cursorword.gif)
-
-
-
-## Installation
-
-Again, I use `vim-plug` in install this plugin.
-
-First add the following line to `.vimrc` file 
-
-```sh
-Plug 'itchyny/vim-cursorword'
-```
-
-Then `source .vimrc` in terminal to make rc file work and finally run `:PlugInstall` in vim.
-
-
-
-## Usage
-
-After the installation, the plugin will work immediately and you don't have to do anything.
+ 

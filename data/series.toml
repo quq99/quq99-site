@@ -7,3 +7,8 @@ summary = "This is the series I learn vim"
 name = "my_c++_journey"
 img = "images/blog/series/my_c++_journey/c++.jpg"
 summary = "This is the series I learn C++"
+
+[[series]]
+name = "my_machine_learning_journey"
+img = "images/blog/series/my_machine_learning_journey/machine_learning.jpg"
+summary = "This is the series I learn Machine Learning"
