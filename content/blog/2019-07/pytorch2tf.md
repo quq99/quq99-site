@@ -103,16 +103,18 @@ torch.onnx.export(torch_model, dummy_input, ONNX_MODEL_PATH, verbose=True, input
 
 
 
-> ```
 > ...
 > %215 : Float(1, 32, 224, 224) = onnx::Conv[dilations=[1, 1], group=1, kernel_shape=[3, 3], pads=[1, 1, 1, 1], strides=[2, 2]](%input, %1, %2), scope: MobileHairNet/_EncodeBlockBlueGreen[encode_block1]/Sequential[layer]/_BlueBlock[0]/Conv2d[layer]
 >   %216 : Float(1, 32, 224, 224) = onnx::Conv[dilations=[1, 1], group=32, kernel_shape=[3, 3], pads=[1, 1, 1, 1], strides=[1, 1]](%215, %3, %4), scope: MobileHairNet/_EncodeBlockBlueGreen[encode_block1]/Sequential[layer]/_GreenBlock[1]/Sequential[layer]/Conv2d[0]
 >   %217 : Float(1, 32, 224, 224) = onnx::BatchNormalization[epsilon=1e-05, is_test=1, momentum=1](%216, %5, %6, %7, %8), scope: MobileHairNet/_EncodeBlockBlueGreen[encode_block1]/Sequential[layer]/_GreenBlock[1]/Sequential[layer]/BatchNorm2d[1]
 >   %218 : Float(1, 32, 224, 224) = onnx::Clip[max=6, min=0](%217), scope: MobileHairNet/_EncodeBlockBlueGreen[encode_block1]/Sequential[layer]/_GreenBlock[1]/Sequential[layer]/ReLU6[2]
 >   ...
-> ```
 
 
+
+we can check if the network is converted right.
+
+ 
 
 # import the ONNX model to tensorflow
 
