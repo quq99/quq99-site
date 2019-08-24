@@ -163,11 +163,11 @@ So, I search the version_converter function in ONNX. Unfortunately it does not w
 
 Also I search the operator set support of upsampling
 
-> ### **Upsample** (deprecated)
+> **Upsample** (deprecated)
 >
 > Upsample the input tensor. Each dimension value of the output tensor is: output_dimension = floor(input_dimension * scale).
 >
-> #### Version
+> **Version**
 >
 > This version of the operator has been deprecated since version 10 of the default ONNX operator set.
 >
