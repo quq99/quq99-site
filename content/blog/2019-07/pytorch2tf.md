@@ -193,9 +193,9 @@ tf_rep.export_graph(TF_MODEL_PATH)
 
 TF_MODEL_PATH is the new tensorflow graph model path
 
+So far, I have finished the work. The rest part is optional
 
-
-# Run the ONNX model to see if it works
+# Run the ONNX model to see if it works（optional）
 
 `ImgTransformer` will load the image and do preprocessing.
 
@@ -226,3 +226,121 @@ class ImgTransformer():
         return self.transform(image)
 ```
 
+
+
+```python
+img_path = os.path.join(DIR_PATH, config.TEST_CORPUS, "images", "Frame\ \(150\).jpg")
+transformer = ImgTransformer(config.IMG_SIZE, color_aug=False)
+img =  transformer.load(img_path)
+display(img)
+```
+
+
+
+> tensor([[[ 0.4902,  0.5137,  0.5216,  ..., -0.6471, -0.6471, -0.6471],
+>          [ 0.4980,  0.5137,  0.5216,  ..., -0.6471, -0.6471, -0.6471],
+>          [ 0.5059,  0.5216,  0.5373,  ..., -0.6471, -0.6471, -0.6392],
+>          ...,
+>          [ 0.0118, -0.0039,  0.0118,  ...,  0.1529,  0.1373,  0.1137],
+>          [-0.0039,  0.0118,  0.0196,  ...,  0.1216,  0.0980,  0.0667],
+>          [-0.0118,  0.0118,  0.0196,  ...,  0.0980,  0.0667,  0.0353]],
+>
+> ​	[[ 0.3569,  0.3804,  0.3882,  ..., -0.7882, -0.7882, -0.7882],
+> ​     	[ 0.3647,  0.3804,  0.3882,  ..., -0.7882, -0.7882, -0.7882],
+> ​     	[ 0.3647,  0.3804,  0.3961,  ..., -0.7882, -0.7882, -0.7804],
+> ​     	...,
+> ​     	[-0.1529, -0.1686, -0.1529,  ..., -0.0196, -0.0353, -0.0510],
+> ​     	[-0.1451, -0.1294, -0.1137,  ..., -0.0667, -0.0824, -0.0902],
+> ​     	[-0.1451, -0.1216, -0.1059,  ..., -0.1059, -0.1137, -0.1216]],
+>
+> ​	[[-0.2706, -0.2471, -0.2471,  ..., -0.7882, -0.7882, -0.7882],
+>  	[-0.2627, -0.2471, -0.2471,  ..., -0.7882, -0.7882, -0.7882],
+>  	[-0.2627, -0.2549, -0.2471,  ..., -0.7882, -0.7882, -0.7882],
+>  	...,
+>  	[-0.4902, -0.5059, -0.4980,  ..., -0.3255, -0.3569, -0.4118],
+>  	[-0.5059, -0.4902, -0.4824,  ..., -0.3725, -0.4039, -0.4275],
+>  	[-0.5059, -0.4824, -0.4824,  ..., -0.4039, -0.4353, -0.4510]]])
+
+
+
+To display the Image, mask, prediction in one row
+
+```python
+def create_multi_figure(rows, dye=False):
+    fig = plt.figure()
+
+  # 3 tensors, the middle one is mask
+    if len(rows[0]) == 3:
+        names = ["Image", "Mask", "Prediction"]
+    else:
+        names = ["Image", "Prediction"]
+
+    for i, data in enumerate(rows):
+        img = data[0]
+        prediction = data[-1]
+
+        # reverse normalization of the oriignal image
+        img = (img + 1) / 2
+        data[0] = img
+
+        if dye:
+            transform_hue = transforms.Compose([
+            transforms.ToPILImage(),
+            transforms.ColorJitter(
+                hue=0.5, saturation=0.8, contrast=0.2, brightness=0.3),
+            transforms.ToTensor()
+          ])
+            dyed = transform_hue(img)
+
+            dyed = prediction * dyed + (1 - prediction) * img
+            data.append(dyed)
+            names.append('Dye')
+
+
+        for j, d in enumerate(data):
+            d = d.squeeze()
+            im = d.data.numpy()
+
+            if im.shape[0] != 3:
+                im = np.expand_dims(im, axis=0)
+                im = np.concatenate((im, im, im), axis=0)
+
+            im = im.transpose(1, 2, 0)
+
+            f = fig.add_subplot(len(rows), len(data), i * len(data)+ j + 1)
+            f.imshow(im)
+            if i == 0:
+                f.set_title(names[j])
+                f.set_xticks([])
+                f.set_yticks([])
+
+    return fig
+```
+
+
+
+```python
+def evaluateOne(img, model, absolute=True):
+    img = img.to(device).unsqueeze(0)
+    pred = model.run(img)[0]
+    pred = torch.from_numpy(pred)
+    if absolute:
+        pred[pred > .5] = 1.
+        pred[pred <= .5] = 0.
+    else:
+        pred[pred < .4] = 0
+
+    rows = [[img[0], pred[0]]]
+    create_multi_figure(rows, dye=True)
+    plt.show()
+```
+
+
+
+```
+evaluateOne(img, tf_rep)
+```
+
+The results are shown here:
+
+![onnx](/images/blog/series/my_machine_learning_journey/2019-08/fcnres.png)
