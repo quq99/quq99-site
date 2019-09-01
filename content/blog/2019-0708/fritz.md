@@ -97,7 +97,7 @@ dependencies {
 
 # Add the HairNet model
 
-## upload the tensorflow lite model
+## Upload the tensorflow lite model
 
 In Dashboard, Click "Custom Models" and choose "CREATE NEW MODEL" to upload models. Then click the model and choose "SDK INSTRUCTIONS", we can see some instructions and information of the model
 
@@ -131,7 +131,7 @@ This can make you include your own tensorflow model into your application.
 
 
 
-## no compress model when build the apk
+## No compress model when build the apk
 
 Under the hood, we use [TensorFlow Lite](https://heartbeat.fritz.ai/how-tensorflow-lite-optimizes-neural-networks-for-mobile-machine-learning-e6ffa7f8ee12) as our mobile machine learning framework. In order to make sure that the model isn’t compressed when the APK is built, you’ll need to add the following in the same build file under the `android` option.
 
@@ -169,12 +169,12 @@ This line will initialize a `HairSegmentationOnDeviceModel` class and convert it
 
 I searched the API document, and I noticed the inherit structure:
 
-| java.lang.Object |                                                              |                                                              |                                                              |                                                              |
-| ---------------- | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| ↳                | [ai.fritz.core.FritzManagedModel](https://docs.fritz.ai/android/3.8.2/reference/ai/fritz/core/FritzManagedModel.html) |                                                              |                                                              |                                                              |
-|                  | ↳                                                            | [ai.fritz.core.FritzOnDeviceModel](https://docs.fritz.ai/android/3.8.2/reference/ai/fritz/core/FritzOnDeviceModel.html) |                                                              |                                                              |
-|                  |                                                              | ↳                                                            | [ai.fritz.vision.imagesegmentation.SegmentOnDeviceModel](https://docs.fritz.ai/android/3.8.2/reference/ai/fritz/vision/imagesegmentation/SegmentOnDeviceModel.html) |                                                              |
-|                  |                                                              |                                                              | ↳                                                            | ai.fritz.fritzvisionhairsegmentationmodel.HairSegmentationOnDeviceModel |
+| java.lang.Object                                             |
+| ------------------------------------------------------------ |
+| ↳[ai.fritz.core.FritzManagedModel](https://docs.fritz.ai/android/3.8.2/reference/ai/fritz/core/FritzManagedModel.html) |
+| ↳[ai.fritz.core.FritzOnDeviceModel](https://docs.fritz.ai/android/3.8.2/reference/ai/fritz/core/FritzOnDeviceModel.html) |
+| ↳[ai.fritz.vision.imagesegmentation.SegmentOnDeviceModel](https://docs.fritz.ai/android/3.8.2/reference/ai/fritz/vision/imagesegmentation/SegmentOnDeviceModel.html) |
+| ↳ai.fritz.fritzvisionhairsegmentationmodel.HairSegmentationOnDeviceModel |
 
 So I can mimic the `HairSegmentationOnDeviceModel` and create an new class inherent from `ai.fritz.vision.imagesegmentation.SegmentOnDeviceModel`. 
 
