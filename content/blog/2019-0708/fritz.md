@@ -20,7 +20,7 @@ In this post, I would like to share how to deploy tensorflow lite model into and
 
 # Fritz Androide SDK
 
-Fritz is a platform that allow you to create ML features in your mobile applications with ease. [Fritz repo](<https://github.com/fritzlabs/fritz-repository>)
+Fritz is a platform that allows you to create ML features in your mobile applications with ease. [Fritz repo](<https://github.com/fritzlabs/fritz-repository>)
 
 
 
@@ -127,13 +127,13 @@ dependencies {
 }
 ```
 
-This can make you include your own tensorflow model into your application.
+This can make you include your own tensorflow lite model into your application.
 
 
 
 ## No compress model when build the apk
 
-Under the hood, we use [TensorFlow Lite](https://heartbeat.fritz.ai/how-tensorflow-lite-optimizes-neural-networks-for-mobile-machine-learning-e6ffa7f8ee12) as our mobile machine learning framework. In order to make sure that the model isn’t compressed when the APK is built, you’ll need to add the following in the same build file under the `android` option.
+Under the hood, we use [TensorFlow Lite](https://heartbeat.fritz.ai/how-tensorflow-lite-optimizes-neural-networks-for-mobile-machine-learning-e6ffa7f8ee12) as our mobile machine learning framework. In order to make sure that the model isn’t compressed when the APK is built, we’ll need to add the following code in the same build file under the `android` option.
 
 ```json
 android {
@@ -150,11 +150,11 @@ android {
 
 # Create a Segmentation Predictor with a Hair Segmentation model
 
-We can either include your model with the app or load the model when the app runs (recommended to reduce the size of your APK). In my project, I include my model on device.
+We can either include the model with the app or load the model when the app runs (recommended to reduce the size of your APK). In my project, I include my model on device.
 
 ## Create model class
 
-In Dashboard, Click "Custom Models" and choose your uploaded model, click and then click "SDK Instructions". You can see a brief instruction. And our model ID so that he Fritz can monitor the model's performance. Because we include the model on device rather than load the model at running time. I placed the model on local. The model is placed in `/app/src/main/assets/converted_model_hairnet.tflite`.
+In Dashboard, Click "Custom Models" and choose the uploaded model, click it and then click "SDK Instructions". You can see a brief instruction and our model ID. The ID is used for marking the specific model so that he Fritz can monitor the model's performance. Because we include the model on device rather than load the model at running time. I also placed the model on local directory. The model is placed in `/app/src/main/assets/converted_model_hairnet.tflite`.
 
 Also, I found that the instructions provided by Fritz did not work well for me. So, I search the documentation and create my own model class.
 
@@ -178,13 +178,13 @@ I searched the API document, and I noticed the inherit structure:
 
 So I can mimic the `HairSegmentationOnDeviceModel` and create an new class inherent from `ai.fritz.vision.imagesegmentation.SegmentOnDeviceModel`. 
 
-The next thing is, I should tell the constructor the information about my model including input layer and output layer name, and input size. 
+The next thing is, I should tell the constructor the information about my model including input/output layer name, and input/output size. 
+
+I found that the constructor of `SegmentOndeviceModel` looks like this.
 
 ```java
 SegmentOnDeviceModel(String modelPath, String modelId, int modelVersion, MaskType[] classifications, String inputLayerName, int inputSize, String outputLayerName, int outputSize)
 ```
-
-I found that the constructor of `SegmentOndeviceModel` looks like this.
 
 So, my model class looks like this:
 
@@ -213,7 +213,7 @@ public class Train_170CustomModel extends SegmentOnDeviceModel {
 
 ##  Set up a predictor using own model
 
-in setupPredictor() method in MainActivity class
+In setupPredictor() method in MainActivity class, write these two lines:
 
 ```java
 SegmentOnDeviceModel onDeviceModel = new Train_170CustomModel();
@@ -229,7 +229,7 @@ public FritzVisionSegmentPredictor getPredictor (SegmentOnDeviceModel onDeviceMo
 
 
 
-so we will get a `FritzVisionSegmentPredictor` object. The input parameter is our model object. 
+so by calling this function, we will get a `FritzVisionSegmentPredictor` object. The input parameter is our model object. 
 
 The next question is what does this  `FritzVisionSegmentPredictor` class(the `predict`) do? I look at the class definition:
 
@@ -440,11 +440,11 @@ private void initializeValues(SegmentOnDeviceModel segmentOnDeviceModel, FritzVi
     }
 ```
 
-We can see it just assign the necessary information about the model. The `segmentClassifications` is a `MaskType[]` variable which tells the predictor what type of segmentation you want. In my project it is just `MaskType.HAIR`  and is given by my defined class  `Train_170CustomModel`. The default batch size is 4 and the input image has same height and width.
+We can see it just initialize the necessary information about the model. The `segmentClassifications` is a `MaskType[]` variable which tells the predictor what type of segmentation you want. In my project it is just `MaskType.HAIR`  and is given by my defined class  `Train_170CustomModel`. The default batch size is 4 and the input image has same height and width size.
 
 
 
-> The rest part is pretty much the same like the fritz [tutorial](<https://heartbeat.fritz.ai/embrace-your-new-look-with-hair-segmentation-by-fritz-now-available-for-android-developers-f20f5b4e9ae1>), for completeness I just list them below and add some notes.
+> The rest part is pretty much the same like the fritz [tutorial](<https://heartbeat.fritz.ai/embrace-your-new-look-with-hair-segmentation-by-fritz-now-available-for-android-developers-f20f5b4e9ae1>), I follow the same structures and add some notes.
 
 # Choose a hair color for prediction
 
@@ -480,14 +480,14 @@ We may also convert a `Bitmap` to a `FritzVisionImage`
 FritzVisionImage visionImage = FritzVisionImage.fromBitmap(bitmap);
 ```
 
-After you’ve create a `FritzVisionImage` object, call `predictor.predict`.
+After we’ve create a `FritzVisionImage` object, call `predictor.predict`.
 
 ```java
 // Run the image through the model to identify pixels representing hair.
 FritzVisionSegmentResult segmentResult = predictor.predict(visionImage);
 ```
 
-This will return a `segmentResult` that you can use to display the hair mask.  
+This will return a `segmentResult` that we can use to display the hair mask.  
 
 We can look at the `FritzVisionSegmentTFLPredictor` to see what happened when calling the predict function:
 
@@ -515,9 +515,9 @@ public FritzVisionSegmentResult predict(FritzVisionImage visionImage) {
     }
 ```
 
-Basically, it does three things, preprocessing, interpreter.run and post processing. The core thing is `interpreter.run`. 
+Basically, it does three things, `preprocessing`, `interpreter.run` and `post processing`. The core thing is `interpreter.run`. 
 
-First, the `interpreter` is defined in 
+First, the `interpreter` is defined in another class
 
 ```java
 package ai.fritz.vision.base;
@@ -554,7 +554,7 @@ public abstract class FritzVisionTFLitePredictor<T> extends FritzVisionPredictor
 }
 ```
 
-As the code shows, `interpreter` is an `ai.fritz.customtflite.FritzTFLiteInterpreter` class which is defined by ourself. We pass our model through `onDeviceModel` and get an interpreter instance.
+As the code shows, `interpreter` is an `ai.fritz.customtflite.FritzTFLiteInterpreter` class instance which is defined by ourself. We pass our model through `onDeviceModel` and get an interpreter instance.
 
 Then we call the `interpreter.run` function to get the prediction. We look into the `ai.fritz.customtflite.FritzTFLiteInterpreter` class and see the `run` function
 
@@ -574,11 +574,10 @@ Then we call the `interpreter.run` function to get the prediction. We look into 
 We can see it calls the `this.interpreter.run` function. So where is the interpreter? we can see in the `FritzTFLiteInterpreter` class, the interpreter is just a tensorflow lite Interpreter class. So that's it. Fritz framework finally calls the tensorflow lite `interpreter.run` function to run the model and get the prediction. 
 
 ```java
-org.tensorflow.lite.Interpreter;
+// sample lines in FritzTFLiteInterpreter class
+import org.tensorflow.lite.Interpreter;
 private Interpreter interpreter;
 ```
-
-
 
 
 
@@ -632,5 +631,7 @@ Bitmap blendedBitmap = visionImage.blend(maskBitmap, blendMode);
 
 
 # Track the performance of your model
+
+I deployed the model to android applicaiton and run it on "Xiaomi Mi A2 Lite" mobile phone. Look at the prediction time on the "Custom Models" board, we can see that the average prediction time is 330ms which is acceptable. And 95% of the prediction time is under 363 ms indicating that our model is pretty stable.
 
 ![info](/images/blog/series/my_machine_learning_journey/2019-08/modelinfo.png)
